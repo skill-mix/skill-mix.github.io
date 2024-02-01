@@ -151,8 +151,8 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <!-- Buttons for changing table content -->
-      <button onclick="changeContent('option1')">Option 1</button>
-      <button onclick="changeContent('option2')">Option 2</button>
+      <button id="option1Button" onclick="changeContent('option1')">Option 1</button>
+      <button id="option2Button" onclick="changeContent('option2')">Option 2</button>
       <table id="myTable">
         <tr>
             <th>Header 1</th>
@@ -167,10 +167,13 @@
       </table>
       
       <script>
+          // Initially set a default option as active
+          document.getElementById("option1Button").classList.add("active-button");
+
           function changeContent(option) {
               var table = document.getElementById("myTable");
-              var button1 = document.getElementById("button1");
-              var button2 = document.getElementById("button2");
+              var button1 = document.getElementById("option1Button");
+              var button2 = document.getElementById("option2Button");
       
               if (option === 'option1') {
                   // Update table content for option 1
