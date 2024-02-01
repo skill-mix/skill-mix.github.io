@@ -237,9 +237,9 @@
       <!-- ALT VERSION -->
       <!-- Buttons for changing content -->
       <div class="button-container">
-        <button class="option-button" onclick="changeContent(0)">Ratio of Full Marks</button>
-        <button class="option-button" onclick="changeContent(1)">Ratio of All Skills</button>
-        <button class="option-button" onclick="changeContent(2)">Skill Fraction</button>
+        <button class="option-button" id="ratioOfFullMarks" onclick="changeContent(0)">Ratio of Full Marks</button>
+        <button class="option-button" id="ratioOfAllSkiils" onclick="changeContent(1)">Ratio of All Skills</button>
+        <button class="option-button" id="skillFraction" onclick="changeContent(2)">Skill Fraction</button>
       </div>
       <!-- Table Structure -->
       <table>
@@ -333,6 +333,7 @@
       </table>
       
       <script>
+          document.getElementById("ratioOfFullMarks").classList.add("active-button");
           // Function to change content based on selected option
           function changeContent(optionIndex) {
               // Find all table cells with the 'data-res' attribute
@@ -342,6 +343,16 @@
               cells.forEach(cell => {
                   const options = cell.getAttribute('data-res').split(',');
                   cell.textContent = options[optionIndex] || '-';
+              });
+
+              // Update button active states
+              const buttons = document.querySelectorAll('.option-button');
+              buttons.forEach((btn, index) => {
+                  if (index === optionIndex) {
+                      btn.classList.add("active-button");
+                  } else {
+                      btn.classList.remove("active-button");
+                  }
               });
           }
       
