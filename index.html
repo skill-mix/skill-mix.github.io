@@ -233,6 +233,50 @@
               }
           }
       </script>
+
+      <!-- ALT VERSION -->
+      <!-- Buttons for changing content -->
+      <button class="option-button" onclick="changeContent(0)">Option 1</button>
+      <button class="option-button" onclick="changeContent(1)">Option 2</button>
+      <button class="option-button" onclick="changeContent(2)">Option 3</button>
+      
+      <!-- Table Structure -->
+      <table>
+          <tr>
+              <th>Student (generator)</th>
+              <th>\(k=2\)</th>
+              <th>\(k=3\)</th>
+              <th>\(k=4\)</th>
+              <th>\(k=5\)</th>
+              <th>\(k=6\)</th>
+          </tr>
+          <tr>
+              <td>Llama 7</td>
+              <td data-res=".03,.09,.32"></td>
+              <td data-res=".00,.00,.22"></td>
+              <td data-res=".00,.00,.20"></td>
+              <td data-res="-,-,-"></td>
+              <td data-res="-,-,-"></td>
+          </tr>
+          <!-- Additional rows follow the same pattern -->
+      </table>
+      
+      <script>
+          // Function to change content based on selected option
+          function changeContent(optionIndex) {
+              // Find all table cells with the 'data-res' attribute
+              const cells = document.querySelectorAll('td[data-res]');
+      
+              // Update each cell's content based on the selected option
+              cells.forEach(cell => {
+                  const options = cell.getAttribute('data-res').split(',');
+                  cell.textContent = options[optionIndex] || '-';
+              });
+          }
+      
+          // Initialize table with Option 1 displayed
+          window.onload = () => changeContent(0);
+      </script>
     </div>
   </div>
 </section>
