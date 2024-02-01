@@ -145,24 +145,53 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <table>
-        <tr>
-          <th>Header 1</th>
-          <th>Header 2</th>
-        </tr>
-        <tr>
-          <td>Row 1, Cell 1</td>
-          <td>Row 1, Cell 2</td>
-        </tr>
-        <tr>
-          <td>Row 2, Cell 1</td>
-          <td>Row 2, Cell 2</td>
-        </tr>
-        <tr>
-          <td>Row 3, Cell 1</td>
-          <td>Row 3, Cell 2</td>
-        </tr>
-      </table>
+      <!-- Buttons for changing table content -->
+      <button onclick="changeContent('option1')">Option 1</button>
+      <button onclick="changeContent('option2')">Option 2</button>
+      <table id="myTable">
+    <tr>
+        <th>Header 1</th>
+        <th>Header 2</th>
+    </tr>
+    <tr>
+        <td>Default 1</td>
+        <td>Default 2</td>
+    </tr>
+        
+    <!-- More rows can be added here -->
+    </table>
+    
+    <script>
+        function changeContent(option) {
+            var table = document.getElementById("myTable");
+    
+            if (option === 'option1') {
+                table.innerHTML = `
+                    <tr>
+                        <th>Header 1</th>
+                        <th>Header 2</th>
+                    </tr>
+                    <tr>
+                        <td>Option 1 - Cell 1</td>
+                        <td>Option 1 - Cell 2</td>
+                    </tr>
+                    <!-- More rows for option 1 -->
+                `;
+            } else if (option === 'option2') {
+                table.innerHTML = `
+                    <tr>
+                        <th>Header 1</th>
+                        <th>Header 2</th>
+                    </tr>
+                    <tr>
+                        <td>Option 2 - Cell 1</td>
+                        <td>Option 2 - Cell 2</td>
+                    </tr>
+                    <!-- More rows for option 2 -->
+                `;
+            }
+        }
+    </script>
 <!--       <video poster="" id="tree" autoplay controls muted loop height="100%">
         <!-- Your video here -->
 <!--         <source src="static/videos/banner_video.mp4"
