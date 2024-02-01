@@ -62,8 +62,26 @@
     }
     /* Style for active button */
     .active-button {
-        background-color: #4CAF50; /* Green background */
+        background-color: #4169E1; /* Royal blue background */
         color: white;
+    }
+    /* Centering buttons and making them round */
+    .button-container {
+        text-align: center; /* Center the buttons container */
+        margin: 20px 0; /* Add some margin for spacing */
+    }
+    button {
+        border: none;
+        color: white;
+        padding: 10px 20px; /* Padding for size */
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px; /* Margin for spacing between buttons */
+        cursor: pointer;
+        border-radius: 25px; /* Rounded corners */
+        background-color: #008CBA; /* Button color */
     }
   </style>
 </head>
@@ -151,8 +169,11 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <!-- Buttons for changing table content -->
-      <button id="option1Button" onclick="changeContent('option1')">Option 1</button>
-      <button id="option2Button" onclick="changeContent('option2')">Option 2</button>
+      <div class="button-container">
+        <button id="option1Button" onclick="changeContent('option1')">Option 1</button>
+        <button id="option2Button" onclick="changeContent('option2')">Option 2</button>
+      </div>
+      
       <table id="myTable">
         <tr>
             <th>Header 1</th>
