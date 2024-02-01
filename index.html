@@ -43,6 +43,24 @@
   <script src="static/js/bulma-carousel.min.js"></script>
   <script src="static/js/bulma-slider.min.js"></script>
   <script src="static/js/index.js"></script>
+
+  <style>
+    table {
+      margin-left: auto;
+      margin-right: auto;
+      border-collapse: collapse; /* Optional: for better border appearance */
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px; /* Optional: for better cell spacing */
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2; /* Light grey color for even rows */
+    }
+    tr:nth-child(odd) {
+      background-color: #ffffff; /* White color for odd rows */
+    }
+  </style>
 </head>
 <body>
 
@@ -127,7 +145,7 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <table border="1">
+      <table>
         <tr>
           <th>Header 1</th>
           <th>Header 2</th>
@@ -139,6 +157,10 @@
         <tr>
           <td>Row 2, Cell 1</td>
           <td>Row 2, Cell 2</td>
+        </tr>
+        <tr>
+          <td>Row 3, Cell 1</td>
+          <td>Row 3, Cell 2</td>
         </tr>
       </table>
 <!--       <video poster="" id="tree" autoplay controls muted loop height="100%">
