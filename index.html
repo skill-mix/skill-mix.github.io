@@ -84,6 +84,13 @@
         background-color: #f2f2f2; /* Button color */
     }
   </style>
+
+  <script>
+      // Example function that gets called when a row button is clicked
+      function onRowButtonClick(studentName) {
+          alert("Button clicked for: " + studentName);
+      }
+  </script>
 </head>
 <body>
 
@@ -181,7 +188,7 @@
         <button class="option-button" id="skillFraction" onclick="changeContent(2)">Skill Fraction</button>
       </div>
       <!-- Table Structure -->
-      <table>
+      <table id="gpt4">
           <tr>
               <th>Student (generator)</th>
               <th>k=2</th>
@@ -297,6 +304,39 @@
       
           // Initialize table with Option 1 displayed
           window.onload = () => changeContent(0);
+          highlightLargestValues();
+      </script>
+
+      <script>
+          function highlightLargestValues() {
+              const table = document.getElementById("gpt4");
+              const rows = table.rows;
+              const columnCount = rows[0].cells.length;
+      
+              for (let i = 1; i < columnCount; i++) { // Start from 1 to skip the first column of names
+                  let maxVal = -Infinity;
+                  let cellsToHighlight = [];
+      
+                  // Find the max value in the column
+                  for (let j = 1; j < rows.length; j++) {
+                      const val = parseFloat(rows[j].cells[i].innerText);
+                      if (val > maxVal) {
+                          maxVal = val;
+                          cellsToHighlight = [rows[j].cells[i]]; // Reset the list with the new max value cell
+                      } else if (val === maxVal) {
+                          cellsToHighlight.push(rows[j].cells[i]); // Add cell with the same max value
+                      }
+                  }
+      
+                  // Highlight all cells with the max value
+                  cellsToHighlight.forEach(cell => {
+                      cell.style.backgroundColor = 'orange';
+                  });
+              }
+          }
+      
+          // Run the function when the page has loaded
+          window.onload = highlightLargestValues;
       </script>
     </div>
   </div>
