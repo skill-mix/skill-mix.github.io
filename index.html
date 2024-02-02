@@ -279,7 +279,8 @@
       </table>
       
       <script>
-          document.getElementById("ratioOfFullMarks").classList.add("active-button");
+          // document.getElementById("ratioOfFullMarks").classList.add("active-button");
+          
           // Function to change content based on selected option
           function changeContent(optionIndex) {
               // Find all table cells with the 'data-res' attribute
@@ -305,7 +306,7 @@
           }
       
           // Initialize table with Option 1 displayed
-          window.onload = () => changeContent(0);
+          // window.onload = () => changeContent(0);
       </script>
 
       <script>
@@ -338,7 +339,11 @@
       
           // Run the function when the page has loaded
           window.onload = highlightLargestValues;
-      </script>
+      </script> 
+          document.getElementById("ratioOfFullMarks").classList.add("active-button");
+          window.onload = () => changeContent(0);
+      <script>
+      </script>  
     </div>
   </div>
 </section>
