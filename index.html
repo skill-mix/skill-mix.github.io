@@ -310,17 +310,17 @@ RedPajama is less than 5%, and deduct points for skills whose name is mentioned 
           .catch(error => console.error(`Error loading data for ${studentName}:`, error));
       }
 
-      function loadDataForAllStudents(studentNames) {
-          Promise.all(studentNames.map(studentName =>
-              fetch(`${studentName}.json`).then(response => response.json())
-          )).then(allData => {
-              allData.forEach((data, index) => {
-                  // Insert data into the table for this student
-                  // studentNames[index] gives you the name of the student
-                  insertDataIntoTable(studentNames[index], data);
-              });
-          }).catch(error => console.error("Error loading data:", error));
-      }
+      // function loadDataForAllStudents(studentNames) {
+      //     Promise.all(studentNames.map(studentName =>
+      //         fetch(`${studentName}.json`).then(response => response.json())
+      //     )).then(allData => {
+      //         allData.forEach((data, index) => {
+      //             // Insert data into the table for this student
+      //             // studentNames[index] gives you the name of the student
+      //             insertDataIntoTable(studentNames[index], data);
+      //         });
+      //     }).catch(error => console.error("Error loading data:", error));
+      // }
       
       // List of students to load data for
       const students = ["LLaMA-2-7B-Chat",
@@ -329,13 +329,102 @@ RedPajama is less than 5%, and deduct points for skills whose name is mentioned 
       
       // Load data for each student
       // students.forEach(loadData);
-      loadDataForAllStudents(students);
+      // loadDataForAllStudents(students);
       // document.getElementById("ratioOfFullMarks").classList.add("active-button");
       // changeContent(0);
 
       </script>
-      
+
       <script>
+            // Improved function for loading data based on the button pressed
+            function loadDataForAllStudents(studentNames, optionIndex = 0) {
+                // Clear existing table rows, except for the header
+                const table = document.getElementById('gpt4');
+                while(table.rows.length > 1) {
+                    table.deleteRow(1);
+                }
+        
+                // Fetch and process data for each student
+                Promise.all(studentNames.map(studentName =>
+                    fetch(`student_scores/${studentName}.json`).then(response => response.json())
+                )).then(allData => {
+                    allData.forEach((data, index) => {
+                        // Insert data into the table for this student
+                        insertDataIntoTable(studentNames[index], data, optionIndex);
+                    });
+                }).catch(error => console.error("Error loading data:", error));
+            }
+        
+            function insertDataIntoTable(studentName, data, optionIndex) {
+                const table = document.getElementById('gpt4');
+                const row = table.insertRow();
+                const nameCell = row.insertCell();
+                nameCell.textContent = studentName;
+        
+                // Insert specific data based on optionIndex
+                const keys = ['k=2', 'k=3', 'k=4', 'k=5', 'k=6']; // Assuming these are your keys
+                keys.forEach((key, index) => {
+                    const cell = row.insertCell();
+                    const valueArray = data[key];
+                    cell.textContent = valueArray ? valueArray[optionIndex] : '-'; // Adjust based on how your data is structured
+                });
+            }
+        
+            // Initialization logic to load data for button 0 upon page load
+            document.addEventListener('DOMContentLoaded', function() {
+                changeContent(0); // Load data relevant to button 0 upon initialization
+            }, false);
+        
+            function changeContent(optionIndex) {
+                loadDataForAllStudents(students, optionIndex);
+            
+                // Update button active states
+                const buttons = document.querySelectorAll('.option-button');
+                buttons.forEach((btn, index) => {
+                    if (index === optionIndex) {
+                        btn.classList.add("active-button");
+                    } else {
+                        btn.classList.remove("active-button");
+                    }
+                });
+            
+                // Call highlight function after a slight delay to ensure DOM has updated
+                setTimeout(highlightLargestValues, 100);
+            }
+
+            function highlightLargestValues() {
+                const table = document.getElementById("gpt4");
+                const rowCount = table.rows.length;
+                if (rowCount <= 1) return; // Skip if table has only headers or is empty
+            
+                const columnCount = table.rows[0].cells.length;
+            
+                // Iterate over each column, starting from 1 to skip the student name column
+                for (let columnIndex = 1; columnIndex < columnCount; columnIndex++) {
+                    let maxVal = -Infinity;
+                    let cellsToHighlight = [];
+            
+                    // Find the max value in the column and the cells that have this value
+                    for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+                        const cell = table.rows[rowIndex].cells[columnIndex];
+                        const cellValue = parseFloat(cell.textContent);
+                        if (cellValue > maxVal) {
+                            maxVal = cellValue;
+                            cellsToHighlight = [cell];
+                        } else if (cellValue === maxVal) {
+                            cellsToHighlight.push(cell);
+                        }
+                    }
+            
+                    // Highlight all cells with the max value
+                    cellsToHighlight.forEach(cell => cell.style.backgroundColor = 'orange');
+                }
+            }
+        
+            // Optional: If you have a function to highlight the largest values, make sure to call it at the end of data loading or updating
+        </script>
+      
+<!--       <script>
           // document.getElementById("ratioOfFullMarks").classList.add("active-button");
           
           // Function to change content based on selected option
@@ -405,7 +494,7 @@ RedPajama is less than 5%, and deduct points for skills whose name is mentioned 
           document.getElementById("ratioOfFullMarks").classList.add("active-button");
           // window.onload = () => changeContent(0);
           window.onload = changeContent(0);
-      </script>  
+      </script>   -->
 
 <!--       <div class="plain-text">
         <span><strong>Grader: GPT-4</strong></span>
