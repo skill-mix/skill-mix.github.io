@@ -214,7 +214,7 @@ RedPajama is less than 5%, and deduct points for skills whose name is mentioned 
               <td data-res="-,-,-"></td>
               <td data-res="-,-,-"></td>
           </tr>
-          <td>LLaMA-2-13B-Chat</td>
+<!--           <td>LLaMA-2-13B-Chat</td>
               <td data-res=".06,.14,.33"></td>
               <td data-res=".00,.00,.30"></td>
               <td data-res=".00,.00,.35"></td>
@@ -284,8 +284,38 @@ RedPajama is less than 5%, and deduct points for skills whose name is mentioned 
               <td data-res=".00,.00,.08"></td>
               <td data-res="-,-,-"></td>
               <td data-res="-,-,-"></td>
-          </tr>
+          </tr> -->
       </table>
+
+      <script>
+      function loadData(studentName) {
+          // Dynamically generate the file path based on the student name
+          const filePath = `student_scores/${studentName}.json`;
+      
+          fetch(filePath)
+          .then(response => response.json())
+          .then(data => {
+              const table = document.getElementById('gpt4');
+              const row = table.insertRow();
+              const nameCell = row.insertCell();
+              nameCell.textContent = studentName;
+      
+              // Insert values for k=2 to k=6
+              Object.entries(data).forEach(([key, valueArray]) => {
+                  const cell = row.insertCell();
+                  cell.setAttribute('data-res', valueArray.join(','));
+                  cell.textContent = valueArray.join(', '); // Adjust as needed
+              });
+          })
+          .catch(error => console.error(`Error loading data for ${studentName}:`, error));
+      }
+      
+      // List of students to load data for
+      const students = ["LLaMA-2-7B-Chat"];
+      
+      // Load data for each student
+      students.forEach(loadData);
+      </script>
       
       <script>
           // document.getElementById("ratioOfFullMarks").classList.add("active-button");
