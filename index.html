@@ -193,7 +193,7 @@ RedPajama is less than 5%, and deduct points for skills whose name is mentioned 
       <!-- Buttons for changing content -->
       <div class="button-container">
         <button class="option-button" id="ratioOfFullMarks" onclick="changeContent(0)">Ratio of Full Marks</button>
-        <button class="option-button" id="ratioOfAllSkiils" onclick="changeContent(1)">Ratio of All Skills</button>
+        <button class="option-button" id="ratioOfAllSkills" onclick="changeContent(1)">Ratio of All Skills</button>
         <button class="option-button" id="skillFraction" onclick="changeContent(2)">Skill Fraction</button>
       </div>
       <!-- Table Structure -->
@@ -316,7 +316,7 @@ RedPajama is less than 5%, and deduct points for skills whose name is mentioned 
                         "LLaMA-2-70B-Chat"];
       
       // Load data for each student
-      students.forEach(loadData);
+      // students.forEach(loadData);
       </script>
       
       <script>
@@ -324,6 +324,7 @@ RedPajama is less than 5%, and deduct points for skills whose name is mentioned 
           
           // Function to change content based on selected option
           function changeContent(optionIndex) {
+              students.forEach(loadData);
               // Find all table cells with the 'data-res' attribute
               const cells = document.querySelectorAll('td[data-res]');
       
