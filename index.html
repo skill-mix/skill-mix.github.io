@@ -309,6 +309,18 @@ RedPajama is less than 5%, and deduct points for skills whose name is mentioned 
           })
           .catch(error => console.error(`Error loading data for ${studentName}:`, error));
       }
+
+      function loadDataForAllStudents(studentNames) {
+          Promise.all(studentNames.map(studentName =>
+              fetch(`${studentName}.json`).then(response => response.json())
+          )).then(allData => {
+              allData.forEach((data, index) => {
+                  // Insert data into the table for this student
+                  // studentNames[index] gives you the name of the student
+                  insertDataIntoTable(studentNames[index], data);
+              });
+          }).catch(error => console.error("Error loading data:", error));
+      }
       
       // List of students to load data for
       const students = ["LLaMA-2-7B-Chat",
@@ -324,7 +336,8 @@ RedPajama is less than 5%, and deduct points for skills whose name is mentioned 
           
           // Function to change content based on selected option
           function changeContent(optionIndex) {
-              students.forEach(loadData);
+              // students.forEach(loadData);
+              loadDataForAllStudents(students);
               // Find all table cells with the 'data-res' attribute
               const cells = document.querySelectorAll('td[data-res]');
       
