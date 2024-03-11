@@ -206,122 +206,9 @@ RedPajama is less than 5%, and deduct points for skills whose name is mentioned 
               <th>k=5</th>
               <th>k=6</th>
           </tr>
-<!--           <tr>
-              <td>LLaMA-2-7B-Chat</td>
-              <td data-res=".03,.09,.32"></td>
-              <td data-res=".00,.00,.22"></td>
-              <td data-res=".00,.00,.20"></td>
-              <td data-res="-,-,-"></td>
-              <td data-res="-,-,-"></td>
-          </tr> -->
-<!--           <td>LLaMA-2-13B-Chat</td>
-              <td data-res=".06,.14,.33"></td>
-              <td data-res=".00,.00,.30"></td>
-              <td data-res=".00,.00,.35"></td>
-              <td data-res="-,-,-"></td>
-              <td data-res="-,-,-"></td>
-          </tr>
-          <tr>
-              <td>LLaMA-2-70B-Chat</td>
-              <td data-res=".22,.22,.58"></td>
-              <td data-res=".00,.02,.43"></td>
-              <td data-res=".00,.00,.40"></td>
-              <td data-res="-,-,-"></td>
-              <td data-res="-,-,-"></td>
-          </tr>
-          <tr>
-              <td>GPT-3.5-turbo</td>
-              <td data-res=".40,.49,.68"></td>
-              <td data-res=".04,.04,.48"></td>
-              <td data-res=".00,.00,.39"></td>
-              <td data-res=".00,.00,.36"></td>
-              <td data-res="-,-,-"></td>
-          </tr>
-          <tr>
-              <td>GPT-4</td>
-              <td data-res=".95,.95,.98"></td>
-              <td data-res=".66,.66,.88"></td>
-              <td data-res=".48,.50,.85"></td>
-              <td data-res=".12,.12,.79"></td>
-              <td data-res=".08,.08,.76"></td>
-          </tr>
-          <tr>
-              <td>Mistral-7B-Instruct-v0.1</td>
-              <td data-res=".02,.03,.35"></td>
-              <td data-res=".00,.00,.31"></td>
-              <td data-res=".00,.00,.20"></td>
-              <td data-res="-,-,-"></td>
-              <td data-res="-,-,-"></td>
-          </tr>
-          <tr>
-              <td>Qwen-14B-Chat</td>
-              <td data-res=".09,.14,.45"></td>
-              <td data-res=".00,.02,.34"></td>
-              <td data-res=".00,.00,.30"></td>
-              <td data-res="-,-,-"></td>
-              <td data-res="-,-,-"></td>
-          </tr>
-          <tr>
-              <td>Xwin-LM-70B-V0.1</td>
-              <td data-res=".38,.51,.62"></td>
-              <td data-res=".06,.08,.52"></td>
-              <td data-res=".00,.00,.44"></td>
-              <td data-res=".00,.00,.39"></td>
-              <td data-res="-,-,-"></td>
-          </tr>
-          <tr>
-              <td>Falcon-180B-Chat</td>
-              <td data-res=".20,.25,.45"></td>
-              <td data-res=".00,.00,.46"></td>
-              <td data-res=".00,.00,.30"></td>
-              <td data-res="-,-,-"></td>
-              <td data-res="-,-,-"></td>
-          </tr>
-          <tr>
-              <td>Tigerbot-70B-Chat</td>
-              <td data-res=".03,.12,.19"></td>
-              <td data-res=".00,.00,.11"></td>
-              <td data-res=".00,.00,.08"></td>
-              <td data-res="-,-,-"></td>
-              <td data-res="-,-,-"></td>
-          </tr> -->
       </table>
 
       <script>
-      function loadData(studentName) {
-          // Dynamically generate the file path based on the student name
-          const filePath = `student_scores/${studentName}.json`;
-      
-          fetch(filePath)
-          .then(response => response.json())
-          .then(data => {
-              const table = document.getElementById('gpt4');
-              const row = table.insertRow();
-              const nameCell = row.insertCell();
-              nameCell.textContent = studentName;
-      
-              // Insert values for k=2 to k=6
-              Object.entries(data).forEach(([key, valueArray]) => {
-                  const cell = row.insertCell();
-                  cell.setAttribute('data-res', valueArray.join(','));
-                  cell.textContent = valueArray.join(', '); // Adjust as needed
-              });
-          })
-          .catch(error => console.error(`Error loading data for ${studentName}:`, error));
-      }
-
-      // function loadDataForAllStudents(studentNames) {
-      //     Promise.all(studentNames.map(studentName =>
-      //         fetch(`${studentName}.json`).then(response => response.json())
-      //     )).then(allData => {
-      //         allData.forEach((data, index) => {
-      //             // Insert data into the table for this student
-      //             // studentNames[index] gives you the name of the student
-      //             insertDataIntoTable(studentNames[index], data);
-      //         });
-      //     }).catch(error => console.error("Error loading data:", error));
-      // }
-      
       // List of students to load data for
       const students = ["LLaMA-2-7B-Chat",
                         "LLaMA-2-13B-Chat",
@@ -333,12 +220,6 @@ RedPajama is less than 5%, and deduct points for skills whose name is mentioned 
                         "Xwin-LM-70B-V0.1",
                         "Falcon-180B-Chat",
                         "Tigerbot-70B-Chat"];
-      
-      // Load data for each student
-      // students.forEach(loadData);
-      // loadDataForAllStudents(students);
-      // document.getElementById("ratioOfFullMarks").classList.add("active-button");
-      // changeContent(0);
 
       </script>
 
@@ -429,96 +310,7 @@ RedPajama is less than 5%, and deduct points for skills whose name is mentioned 
                 }
             }
         
-            // Optional: If you have a function to highlight the largest values, make sure to call it at the end of data loading or updating
         </script>
-      
-<!--       <script>
-          // document.getElementById("ratioOfFullMarks").classList.add("active-button");
-          
-          // Function to change content based on selected option
-          function changeContent(optionIndex) {
-              loadDataForAllStudents(students);
-
-              // Find all table cells with the 'data-res' attribute
-              const cells = document.querySelectorAll('td[data-res]');
-      
-              // Update each cell's content based on the selected option
-              cells.forEach(cell => {
-                  const options = cell.getAttribute('data-res').split(',');
-                  cell.textContent = options[optionIndex] || '-';
-              });
-
-              // Update button active states
-              const buttons = document.querySelectorAll('.option-button');
-              buttons.forEach((btn, index) => {
-                  if (index === optionIndex) {
-                      btn.classList.add("active-button");
-                  } else {
-                      btn.classList.remove("active-button");
-                  }
-              });
-
-              window.onload = highlightLargestValues();
-              // highlightLargestValues();
-          }
-      
-          // Initialize table with Option 1 displayed
-          // window.onload = () => changeContent(0);
-      </script>
-
-      <script>
-          function highlightLargestValues() {
-              const table = document.getElementById("gpt4");
-              const rows = table.rows;
-              const columnCount = rows[0].cells.length;
-      
-              for (let i = 1; i < columnCount; i++) { // Start from 1 to skip the first column of names
-                  let maxVal = -Infinity;
-                  let cellsToHighlight = [];
-      
-                  // Find the max value in the column
-                  for (let j = 1; j < rows.length; j++) {
-                      const val = parseFloat(rows[j].cells[i].innerText);
-                      if (val > maxVal) {
-                          maxVal = val;
-                          cellsToHighlight = [rows[j].cells[i]]; // Reset the list with the new max value cell
-                      } else if (val === maxVal) {
-                          cellsToHighlight.push(rows[j].cells[i]); // Add cell with the same max value
-                      }
-                  }
-      
-                  // Highlight all cells with the max value
-                  cellsToHighlight.forEach(cell => {
-                      cell.style.backgroundColor = 'orange';
-                  });
-              }
-          }
-      
-          // Run the function when the page has loaded
-          window.onload = highlightLargestValues;
-      </script> 
-          
-      <script>
-          document.getElementById("ratioOfFullMarks").classList.add("active-button");
-          // window.onload = () => changeContent(0);
-          window.onload = changeContent(0);
-      </script>   -->
-
-<!--       <div class="plain-text">
-        <span><strong>Grader: GPT-4</strong></span>
-      </div>
-      <div class="plain-text">
-        <span>Metrics are reported for each student model at k = 2, 3, 4. Evaluations on k = 5, 6 are skipped if the metric drops
-below 0.05 with smaller k. We consider combinations with uncommon skills whose occurrence rate in
-RedPajama is less than 5%, and deduct points for skills whose name is mentioned in the text.</span>
-      </div> -->
-    </div>
-  </div>
-</section>
-<!-- End teaser video -->
-
-
-
 
   <footer class="footer">
   <div class="container">
